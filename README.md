@@ -2,19 +2,17 @@
 
 This project aims to build a robust time series forecasting model to predict daily sales for various items across multiple stores. By leveraging both traditional time series methods and machine learning techniques, this project provides accurate forecasts, enabling better inventory and demand planning.
 
-Table of Contents
+# Table of Contents
 
-	•	Project Overview
-	•	Data
-	•	Approach
-	•	Feature Engineering
-	•	Model Selection
-	•	Evaluation Metrics
-	•	Installation
-	•	Usage
-	•	Results
-	•	Future Work
-	•	Contributors
+1. [Project Overview](#Project Overview)
+2. [Data](#Data)
+3. [Approach](#Approach)
+4. [Feature Engineering](#Feature Engineering)
+5. [Model Selection](#Model Selection)
+6. [Evaluation Metrics](#Evaluation Metrics)
+7. [Results](#Results)
+8. [Future Work](#Future Work)
+
 
 Project Overview
 
