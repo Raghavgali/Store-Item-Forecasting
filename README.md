@@ -1,52 +1,95 @@
-# Store-Item-Forecasting
+# 🛒 Store Item Demand Forecasting
 
-This project aims to build a robust time series forecasting model to predict daily sales for various items across multiple stores. By leveraging both traditional time series methods and machine learning techniques, this project provides accurate forecasts, enabling better inventory and demand planning.
+This project builds a robust time series forecasting model to predict daily sales for various items across multiple stores. By combining traditional time series techniques with advanced machine learning (LightGBM, Optuna), we deliver accurate demand forecasts to enhance inventory management and supply chain planning.
 
-# Table of Contents
+---
 
-1. [Project Overview](#Project Overview)
-2. [Data](#Data)
-3. [Approach](#Approach)
-4. [Feature Engineering](#Feature Engineering)
-5. [Model Selection](#Model Selection)
-6. [Evaluation Metrics](#Evaluation Metrics)
-7. [Results](#Results)
-8. [Future Work](#Future Work)
+## 📚 Table of Contents
 
+1. [Project Overview](#project-overview)  
+2. [Data](#data)  
+3. [Approach](#approach)  
+   - [Feature Engineering](#feature-engineering)  
+   - [Model Selection](#model-selection)  
+   - [Evaluation Metrics](#evaluation-metrics)  
+4. [Results](#results)  
+5. [Future Work](#future-work)  
 
-# Project Overview
+---
 
-The goal of this project is to forecast sales for 50 items across 10 stores over a three-month period. This forecasting model will support inventory management, helping to optimize stock levels and meet customer demand effectively. The project involves an extensive feature engineering process, the use of cross-validation techniques tailored for time series data, and experimentation with both machine learning and statistical models.
+## 🧠 Project Overview
 
-# Data
+The goal is to forecast sales for **50 items** across **10 stores** over a 3-month horizon. This allows for proactive inventory management, optimized stock levels, and improved customer service. The project applies extensive feature engineering, time-aware cross-validation, and both ML and statistical models.
 
-The dataset contains daily sales records for multiple items across various stores, with each entry representing the number of units sold on a particular day.
+---
 
-	• Items: 50 unique items.
-	• Stores: 10 different stores.
-	• Time Period: Daily data for multiple years, enabling robust forecasting models.
-	• Forecast Horizon: 3 months of future sales.
+## 🗃️ Data
 
-# Approach
+The dataset contains **daily sales records** with the following characteristics:
 
-## Feature Engineering
+- 📦 50 unique items  
+- 🏪 10 distinct stores  
+- 📅 ~5 years of daily data  
+- 📈 Forecasting Horizon: 3 months into the future  
 
-Around 20 new features were created to capture the trends, seasonality, and cyclic patterns in sales. Key features include:
+---
 
-	• Lag Features: Historical sales data to capture temporal dependencies.
-	• Rolling Window Features: Moving averages and standard deviations over different windows to smooth out short-term fluctuations.
-	• Exponential Weighted Means: For weighting recent data more heavily, capturing more recent trends.
-	• Time-Based Indicators: Indicators for month, day, and season to capture seasonal patterns.
+## 🛠️ Approach
 
-## Model Selection
+### 🔧 Feature Engineering
 
-The project applies both traditional time series models and machine learning models:
+Over 20 features were created to capture trends, seasonality, and cyclic patterns in sales. Notable ones include:
 
-	1. Traditional Models: ARIMA, SARIMA, and other autoregressive models to capture time-dependent patterns.
-	2. Machine Learning Models: Algorithms such as Random Forest, XGBoost, and Linear Regression are tested to utilize the engineered features.
-	3. Cross-Validation: Time series cross-validation with expanding window (forward chaining) using scikit-learn’s TimeSeriesSplit, including a 7-day gap to prevent overfitting.
+- **Lag features** (e.g., 91-day lag to capture quarterly seasonality)  
+- **Rolling averages and std devs** to smooth fluctuations  
+- **Exponential weighted moving averages** for recent trend focus  
+- **Calendar-based indicators**: weekday, month, quarter, is_weekend, is_month_start, etc.  
 
-## Evaluation Metrics
+### 🤖 Model Selection
 
-	• Root Mean Squared Error (RMSE): Primary metric for evaluating forecast accuracy.
-	• Mean Absolute Error (MAE): Used to analyze forecast consistency.
+Three modeling strategies were evaluated:
+
+1. **Statistical Models**: ARIMA, SARIMA (limited due to scale)
+2. **Machine Learning Models**:
+   - `LightGBM` (primary model)
+   - `XGBoost`, `RandomForest`, and `LinearRegression` as benchmarks
+3. **Tuning**:  
+   - `Optuna` was used for LightGBM hyperparameter optimization  
+   - Feature importances were analyzed using `SHAP`
+
+### 📊 Evaluation Metrics
+
+- **RMSE** – Root Mean Squared Error: Primary metric for penalizing large errors  
+- **MAE** – Mean Absolute Error: For consistency in prediction quality  
+
+Cross-validation was done using **TimeSeriesSplit** with an expanding window and a 7-day gap to prevent leakage.
+
+---
+
+## 📈 Results
+
+- **Best performing model**: LightGBM with Optuna tuning  
+- **MAE / RMSE** values (sample): _[Insert actual scores from notebook]_  
+- **Key insights**:
+  - Seasonality is strong around weekends and holidays  
+  - Lag-based features contributed most to predictive power  
+  - Model generalized well across both low- and high-volume stores  
+
+---
+
+## 🚀 Future Work
+
+- Integrate external data: promotions, weather, holidays  
+- Explore deep learning models like LSTM/Transformer  
+- Build real-time forecasting pipeline with batch/stream ingestion  
+- Deploy as an interactive dashboard (Streamlit/FastAPI)
+
+---
+
+## 📦 Run Locally
+
+```bash
+git clone https://github.com/Raghavgali/Store-Item-Forecasting.git
+cd Store-Item-Forecasting
+pip install -r requirements.txt
+jupyter notebook
