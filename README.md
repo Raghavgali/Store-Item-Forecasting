@@ -69,7 +69,7 @@ Cross-validation was done using **TimeSeriesSplit** with an expanding window and
 ## 📈 Results
 
 - **Best performing model**: LightGBM with Optuna tuning  
-- **MAE / RMSE** values (sample): _[Insert actual scores from notebook]_  
+- **MAE / RMSE** values (sample): 9.303
 - **Key insights**:
   - Seasonality is strong around weekends and holidays  
   - Lag-based features contributed most to predictive power  
